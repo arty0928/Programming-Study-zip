@@ -87,3 +87,6 @@ print(my_list)
 d = True
 print(True and False) #False
 print(True or False) #True
+
+e = 3
+print(e!=3)
