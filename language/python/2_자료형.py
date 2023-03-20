@@ -1,4 +1,4 @@
-# 2.2) 리스트 (list)
+## 2.2) 리스트 (list)
     # list가 필요한 이유
         # 한 학급의 성적을 관리할때, 변수를 많이 만들 필요없이, 번호를 부여 (=array)
 
@@ -20,7 +20,10 @@ class_score[0:1]
 print(type(class_score[1])) #int
 print(type(class_score[0:1])) #list
 
-# 2.2-1) 다차원 리스트
+        # find 시간복잡도 : 최악의 경우 n초(인덱스 순서대로)
+
+
+## 2.2-1) 다차원 리스트
     # 리스트 안에 리스트
 a=[
     1,
@@ -47,7 +50,7 @@ print(b)
 print(b[2]) #l
 
 
-# 2.5 ) 딕셔너리(dict)
+## 2.5 ) 딕셔너리(dict)
     #사전의 단어와 뜻이 저장되는 방식과 동일
     # key(단어) : value(뜻)
     # key를 통해 value를 찾음
@@ -66,8 +69,21 @@ my_dict2 = dict(my_key=456,
         #dict가 RAM에서 저장되는 방식
             #dict의 사전적 의미는 hash table
                 #hash brown 연상 : 믹서기에 갈아서 -> 나온 숫자가 메모리의 '주소(key)'에 '값'을 저장
-                
+
+    # find 시간복잡도 : 1 (해당 key의 값만 찾으면 되므로)
 
 
+## 2.6) 집합(Set)
+c = {1,2,3,1} #1 중복은 1개로 본다.
+print(c) #{1, 2, 3}
+
+my_list = {1,2,3,4,4}
+print(my_list)
+set(my_list) #Set 으로 변경 -> 중복을 제거하고 싶을 때
+print(my_list)
 
 
+## 2.7) Bool, Boolean
+d = True
+print(True and False) #False
+print(True or False) #True
