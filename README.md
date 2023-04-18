@@ -31,8 +31,12 @@
 
 * [✅ 2. async/await 프로미스](https://www.notion.so/7dd0d10c0e854dfea03dd3b8d1eb7bef#e0d67c0a021e444e8f5e6aa4907f9555)
 
+
+
 </div>
 </div>
 
 </details>
+
+##### 📌 [데이터 통신](https://www.notion.so/1-4-chap-DATA-COMMUNICATION-08903f05872640dd84c5b1403fefb2f1?pvs=4)
 
