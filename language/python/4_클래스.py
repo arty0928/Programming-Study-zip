@@ -35,3 +35,57 @@ player2 = SoccerPlayer() #SoccerPlayer라는 틀에 찍어내서 나온 모양�
 
 player1.shoot()
 player2.shoot()
+
+
+## 1.4.1.2  attribute 초기화
+class SoccerPlayer:
+    def __init__(self): #생성자, 언더바로 시작하여 원래 init의 기능을 이것으로 대체하겠다 (overriding)
+        print("나 태어났어")
+    def shoot(self):
+        print("슛을 때립니다")
+
+player1 = SoccerPlayer() #SoccerPlayer를 호출하면서 init으로 생성자 실행   player1가 생성되기 전에 print가 출력 
+
+SoccerPlayer.__init__()
+
+####
+
+class SoccerPlayer:
+    def __init__(self, height, weight): #생성자, 언더바로 시작하여 원래 init의 기능을 이것으로 대체하겠다 (overriding)
+        print("나 태어났어")
+        self.wow_height = height
+        self.wow_weight = weight
+
+    def shoot(self):
+        print("슛을 때립니다")
+
+player1 = SoccerPlayer(height = 180, weight = 50)
+player2 = SoccerPlayer(height = 160, weight = 70)
+
+print(player1.wow_height)
+print(player1.wow_weight)
+
+print(player2.wow_height)
+print(player2.wow_weight)
+#설계도는 같지만 창문이나 인테리어를 다르게 하는 것처럼 player1과 player2는 다른것, 각 객체로 존재
+
+
+####
+class SoccerPlayer:
+    def __init__(self, height, weight): #생성자, 언더바로 시작하여 원래 init의 기능을 이것으로 대체하겠다 (overriding)
+        print("나 태어났어")
+        self.wow_height = height
+        self.wow_weight = weight
+
+    def shoot(self):
+        self.wow_height = self.wow_height + 1
+        print("슛을 때립니다")
+
+player1 = SoccerPlayer(180,70)
+player1.wow_height  #180
+player1.shoot() #wow_height = 181
+
+player2 = SoccerPlayer(160,50)
+player2.wow_height  #160
+player2.shoot() #wow_height = 161
+player1.wow_height  #181
