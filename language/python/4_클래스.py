@@ -89,3 +89,101 @@ player2 = SoccerPlayer(160,50)
 player2.wow_height  #160
 player2.shoot() #wow_height = 161
 player1.wow_height  #181
+
+
+## 1.4.2 상속(inheritance)
+class Human:
+    def __init__(self, wow_weight, wow_height):
+        self.weight = wow_weight
+        self.height = wow_height
+
+    def walk(self):
+        print("걷습니다")
+
+h1= Human(50,170)
+h1.walk()
+
+#Human을 Athelete에 상속하기
+class Athelete(Human):
+    #Human을 상속함으로써 아래 내용이 포함됨    
+    # def __init__(self, wow_weight, wow_height):
+    #     self.weight = wow_weight
+    #     self.height = wow_height
+
+    # def walk(self):
+    #     print("걷습니다")
+
+    def workout(self):
+        print("운동을 합니다")
+
+h2 =Athelete(50,180)
+h2.walk()
+
+
+class Athelete(Human):
+    #Human에 내용 추가를 하고 싶으면
+    def __init__(self, wow_weight, wow_height, fat_rate): #생성자
+        super().__init__(wow_weight, wow_height)  #이거는 부모의 내용을 그대로
+        self.fat_rate = fat_rate
+
+    def workout(self):
+        print("운동을 합니다")
+
+
+# 상속을 여러번
+
+class SoccerPlayer(Athelete):
+
+    # 부모의 workout과는 다름 -> 부모의 내용을 덮어쓰기(overwrite)
+    def workout(self):
+        print("축구를 한다")
+    
+h4 = SoccerPlayer(50,180,50)
+h4.walk()
+h4.workout() #축구를 한다
+
+# 상속은 원래 object를 자동적으로 상속받음 -> __init__ 형태로 생성자를 만들어야하는 이유도 규약임.
+class Human(object):
+    def __init__(self, wow_weight, wow_height):
+        self.weight = wow_weight
+        self.height = wow_height
+
+    def walk(self):
+        print("걷습니다")
+
+
+### 1.4.3) 파이썬 기본 자료형(클래스)별 api 살펴보기
+# api(application programming interface)
+    # 프로그래밍 언어, 라이브러리, 어플리케이션 등이 제공하는 기능들을 제어할 수 있게 만든 인터페이스
+a=[1,2,3]
+a.append(3)
+
+c={"c":123}
+c.keys()
+
+### 1.4.4) 객체를 인스터스 변수로 가지고 있기
+
+# team = Team(
+#     coach, 
+#     palyer_list = [
+#         player1, 
+#         player2, 
+#         player3
+#     ]
+# )
+
+### 1.4.5) 객체 method의 cascading
+
+team = Team(
+    coach, 
+    palyer_list = [
+        SoccerPlayer(70), 
+        SoccerPlayer(80), 
+    ]
+)
+
+team.player_list[0].walk()
+# cascading : 앞에서부터 실행, 객체를 부르고 부르고 
+
+
+
