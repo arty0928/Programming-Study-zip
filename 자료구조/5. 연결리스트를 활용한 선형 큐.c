@@ -8,14 +8,18 @@ struct queue {
 	struct queue* link;
 };
 
-struct queue* front= NULL; 
+//구조체 queue를 가르키는 포인터
+struct queue* front= NULL; //typedef struct queue_pointer* qpointer;
 struct queue* rear= NULL;
 
+
 void qinsert(element value){
-	struct queue* newq = (struct queue*)malloc(sizeof(struct queue));
+
+	//queue 사이즈만큼 동적 할당-> 구조체 queue를 가르키는 포인터 타입으로 변환
+	struct queue* newq = (struct queue*)malloc(sizeof(struct queue)); //(qpointer)malloc(sizeof(struct queue))
 	newq -> data = value;
 	newq ->link = NULL;
-	if (rear==NULL)
+	if (rear==NULL) //들어올애가 NULL = queue가 비어있을 때
 		front = newq;
 	
 	else
