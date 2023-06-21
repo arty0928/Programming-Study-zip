@@ -26,7 +26,7 @@ struct tree* search2(struct tree* root, element key){//반복문
 		else root=root->llink; 
 	}
 	printf("트리에 찾는 값이 없습니다.");
-	return NULL; 
+	return NULL;  
 }
 
 void insert(struct tree** root,element value){
