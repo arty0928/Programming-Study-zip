@@ -2,8 +2,6 @@
 #include<stdlib.h>
 #define N 5 
 
-
-
 typedef int element;
 element queue[N];
 int front=0;

@@ -17,7 +17,7 @@ void qinsert(element value){
 } 
 
 element qdelete(){
-	if (front==rear){
+	if (front==rear){ //여기까지 넣음(front) == 여기까지 뺌(rear) 즉, 넣은거 다 뺌 = 공백
 		printf("큐에 값이 없습니다");
 	}
 	front++;
