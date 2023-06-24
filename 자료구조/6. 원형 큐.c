@@ -53,3 +53,4 @@ int main(void){
 	qinsert(4);						// front: 3, rear:5   	(3 4)
 	qinsert(7);						// front: 3, rear:6   	(3 4 7)
 } 
+ 

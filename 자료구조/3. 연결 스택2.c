@@ -32,6 +32,8 @@ element pop(){
 	  printf("스택에 값이 없습니다");
 	  exit(1);
 	  }//NULL일때 거짓
+	  // 0 NULL : false
+	  // 1 혹은 값이 있는 경우 if(2) : true
 
 	stack_pointer del = top;
 	element tmp = top->data ; //삭제한 노드의 데이터 값
