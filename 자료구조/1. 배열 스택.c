@@ -30,7 +30,6 @@ element pop(){
 	return tmp;
 }
 
-
 int main(){
 	push(5); //stack: 5
  	push(3); //stack: 5 3
@@ -40,40 +39,3 @@ int main(){
 	printf("%d\n",pop()); //stack:  , 5출력
 	
 }
-
-// #include <stdio.h>
-// #define N 10
-
-// int stack[N];
-// int top = -1;
-
-// int push(int value){
-//     if(top >=N-1){
-//         printf("stack overflow\n");
-//         return 0;
-//     }
-//     top++;
-//     stack[top]=value;
-// }
-
-// int pop(){
-//     if(top <= -1){
-//         printf("stack이 비어있습니다.\n");
-//         return 0;
-//     }
-//     int tmp = top;
-//     top--;
-//     return stack[tmp];
-// }
-
-
-// int main()
-// {
-//     push(5);
-//     printf("%d\n",pop()); //5
-//     push(4);
-//     printf("%d\n",pop()); //4
-//     push(1); //stack에는 1만 남아있음
-
-//     return 0;
-// }

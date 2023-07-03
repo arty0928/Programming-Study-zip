@@ -29,11 +29,14 @@ struct tree* search2(struct tree* root, element key){//반복문
 	return NULL;  
 }
 
+//
 void insert(struct tree** root,element value){
 	struct tree* newn=(struct tree*)malloc(sizeof(struct tree));
 	newn -> data= value;
 	newn -> rlink=NULL;
 	newn ->llink=NULL;
+	
+	//root가 없으면 root를 가르키는 포인터가 newn
 	if(root==NULL) *root=newn;	
 	 
 }

@@ -11,7 +11,7 @@ typedef struct stack_node{
 }snode;
 
 //stack의 top 현재 비어있음
-stack_pointer top = NULL;
+stack_pointer top = NULL; //null: false 거짓
 
 //삽입
 void push (element value){
@@ -22,18 +22,26 @@ void push (element value){
 
 } 
 
+//0: 꺼짐 거짓 아무것도 없음 NULL(0) = 꺼짐, 거짓
+//1: 켜짐 참 무언가 있음
+
 element pop(){
 
 	// stack =NULL
 	// top = NULL
 	// NULL == FALSE == 0
 	// !NULL == TRUE == 1
+	
+	//if: 이 조건이 참이라면 안에 있는 코드를 실행해줘
+	//!거짓: 참
 	if(!top){ //true일때
 	  printf("스택에 값이 없습니다");
 	  exit(1);
 	  }//NULL일때 거짓
 	  // 0 NULL : false
 	  // 1 혹은 값이 있는 경우 if(2) : true
+
+	  
 
 	stack_pointer del = top;
 	element tmp = top->data ; //삭제한 노드의 데이터 값
