@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- 글자 입력 폼 input 해서 입력한 글자 보이게 -->
+    <script type="text/javascript">
+
+        function displayInput(){
+            var testInput = document.getElementById("name").value;
+
+            if(testInput.length ==0){
+                document.getElementById("para").innerHTML="글자를 입력하세요"
+            }else{
+                document.getElementById("para").innerHTML=testInput;
+            }
+        }
+        function myAlertMath(){
+            var userNumber = document.getElementById("mathInput").value;
+            alert("your number x 5 is"+userNumber*5);
+        }
+        function myPrompt(){
+            // Fred를 default 값으로
+            var person = prompt("Please enter your name", "Fred"); 
+            if(person!=""){
+                document.getElementById("person").innerHTML="Hello " + person 
+            }else{
+                document.getElementById("person").innerHTML="아무것도 입력 안함"
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="alert('The test worked')">alert</button>
+    <H1 style="color:brown">Let's see another button</H1>
+
+    <input id="name" type="text">
+    <button onclick="displayInput()">Color it</button>
+
+    <input id="mathInput" type="number">
+    <button onclick="myAlertMath()">multiply x 5</button>
+
+    <button onclick="myPrompt()">my prompt</button>
+    <p id="person" style="color:blue"></p>
+</body>
+</html>

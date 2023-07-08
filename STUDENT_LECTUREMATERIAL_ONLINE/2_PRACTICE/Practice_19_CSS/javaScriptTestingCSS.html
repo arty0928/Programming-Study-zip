@@ -13,9 +13,21 @@
 		var y = 10;
 		var z = 4;
 		var answer = x * y / z;
-		
-		document.getElementById("output").innerHTML = "The result is " + answer;
+		var p = myPrompt();
+
+		if(p==0 || p==""){
+			document.getElementById("output").innerHTML = "The result is NAN";
+
+		}
+		else{
+			document.getElementById("output").innerHTML = "The result is " + answer + p;
+		}
 	}
+
+	function myPrompt(){
+            // Fred를 default 값으로
+            return person = prompt("Please enter number", 0); 
+        }
 	</script>
 	
 	<style type="text/css">
