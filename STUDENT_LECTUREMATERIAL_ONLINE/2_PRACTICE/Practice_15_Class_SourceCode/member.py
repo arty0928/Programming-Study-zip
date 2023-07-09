@@ -31,6 +31,7 @@ class Faculty(Member):
         self.faculty_number = faculty_num
         self.courses_teaching = []
 
+    # print(snape) 할때 string class를 통해 출력 방식 지정
     def __str__(self):
         """(Faculty) -> str
         Return a string representation of this Faculty

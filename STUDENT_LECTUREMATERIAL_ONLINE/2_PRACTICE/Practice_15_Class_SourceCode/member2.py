@@ -8,6 +8,7 @@ class Member:
         self.id = mid
         self.dept = dept
 
+    # print(snape) 할때 string class를 통해 출력 방식 지정
     def __str__(self):
         """(Member) -> str
         """

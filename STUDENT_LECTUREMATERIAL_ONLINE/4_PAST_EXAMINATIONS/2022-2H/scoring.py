@@ -2,85 +2,85 @@
 # (A) ANSWER START
 
 class MyClass:
-
     numberOfObject = 0
 
-    def __init__(self, givenId):
-        self.id = givenId
-        MyClass.numberOfObject += 1
-        self.wordDictionary = {}
+    def __init__(self,id):
+        self.id = id
+        MyClass.numberOfObject +=1
+        self.stored_dictionary={}
+
 
     def getId(self):
         return self.id
-
-    def setId(self, givenId):
-        if type(givenId) == type(1) or type(givenId) == type(1.0):
+    
+    def setId(self, id):
+        if(type(id)==int or type(id)==float):
             self.id = "XXXX"
         else:
-            self.id = givenId
-
+            self.id = id
+    
     def getNumberOfObject(self):
         return MyClass.numberOfObject
-
-    def storeWordlistAsDictionary(self, givenWordlist):
-        givenWordlist.sort()
-        for item in givenWordlist:
-            if item in self.wordDictionary:
-                self.wordDictionary[item] += 1
+    
+    def storeWordlistAsDictionary(self,my_list):
+        sorted_list = sorted(my_list)
+        for item in sorted_list:
+            if item in self.stored_dictionary:
+                self.stored_dictionary[item] +=1
             else:
-                self.wordDictionary[item] = 1
-        return self.wordDictionary
+                self.stored_dictionary[item]=1
+        return self.stored_dictionary
 
-    def getWordCount(self, givenKey):
-        if givenKey in self.wordDictionary:
-            return (givenKey, self.wordDictionary[givenKey])
+    def getWordCount(self,my_string):
+        if my_string in self.stored_dictionary:
+            return (my_string, self.stored_dictionary[my_string])
         else:
             return False
 
     def getWordList(self):
-        if self.wordDictionary.__len__() != 0:
-            tmpList = []
-            for item in self.wordDictionary:
-                tmpList.append(item)
-            return sorted(tmpList)
+        # if self.stored_dictionary.__len__()!=0:
+        if (len(self.stored_dictionary)!=0):
+            new_list=[]
+
+            # for key in self.stored_dictionary: (key값)
+            for key in (self.stored_dictionary.keys()):
+                new_list.append(key)
+            return sorted(new_list)
         else:
             return False
 
 
 class MyDerivedClass(MyClass):
 
-    def __init__(self, givenId="****"):
-        super().__init__(givenId)
+
+    def __init__(self,id="****"):
+        super().__init__(id)
 
     def __str__(self):
-        rep = ""
-        length = self.wordDictionary.__len__()
-        count = 0
-        for item in self.wordDictionary:
-            rep += "{}".format(item)
-            count += 1
-            if count < length:
-                rep += ','
-        return ("<" + rep + ">")
+        if(len(self.stored_dictionary)==0):
+            return "<>"
+        else:
+            new_list = []
+            for key in self.stored_dictionary: #key값
+                new_list.append(key)
+            formatted_list = "<"+",".join(str(key) for key in new_list)+">" 
+            return formatted_list
 
-    def __gt__(self, target):
-        if self.getWordList().__len__() > target.getWordList().__len__():
+    def __gt__(self, other):
+        if(len(self.stored_dictionary) > len(other.stored_dictionary)):
             return True
         else:
             return False
-
-    def __add__(self, target):
-        tmpDictionary = {}
-        for item in self.wordDictionary:
-            tmpDictionary[item] = self.wordDictionary[item]  # or use copy()
-        for item in target.wordDictionary:
-            if item in tmpDictionary:
-                tmpDictionary[item] += target.wordDictionary[item]
+    
+    def __add__(self, other):
+        newDictionary = MyClass("0000")
+        for key in other.stored_dictionary:
+            if key in self.stored_dictionary:
+                newDictionary.stored_dictionary[key] = self.stored_dictionary[key] + other.stored_dictionary[key]
             else:
-                tmpDictionary[item] = target.wordDictionary[item]
-        tmpObject = MyDerivedClass("0000")
-        tmpObject.wordDictionary = tmpDictionary
-        return tmpObject
+                newDictionary.stored_dictionary[key] = other.stored_dictionary[key]
+        return newDictionary
+
 
 # (A) ANSWER END
 ############################################################
@@ -109,6 +109,7 @@ class StandardMyClass:
     def getNumberOfObject(self):
         return StandardMyClass.numberOfObject
 
+
     def storeWordlistAsDictionary(self, givenWordlist):
         givenWordlist.sort()
         for item in givenWordlist:
@@ -117,6 +118,7 @@ class StandardMyClass:
             else:
                 self.wordDictionary[item] = 1
         return self.wordDictionary
+
 
     def getWordCount(self, givenKey):
         if givenKey in self.wordDictionary:
