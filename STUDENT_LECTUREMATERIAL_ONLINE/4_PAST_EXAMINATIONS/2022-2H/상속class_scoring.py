@@ -1,92 +1,120 @@
 ############################################################
 # (A) ANSWER START
-
 class MyClass:
-    numberOfObject = 0
 
+    # 생성한 누적 객체 개수 
+    numberOfObject =0
+    
+    #1 생성자
     def __init__(self,id):
         self.id = id
         MyClass.numberOfObject +=1
-        self.stored_dictionary={}
-
-
+        self.dictionary={}
+    
+    #2
     def getId(self):
         return self.id
-    
+
+    #3 타입 확인해서 식별자 저장
     def setId(self, id):
-        if(type(id)==int or type(id)==float):
-            self.id = "XXXX"
+        if (type(id) == type(1) or type(id) == type(1.0)):
+            self.id ="XXXX"
         else:
             self.id = id
-    
+     
+    #4 생성된 누적 객체 개수 반환
     def getNumberOfObject(self):
         return MyClass.numberOfObject
     
-    def storeWordlistAsDictionary(self,my_list):
-        sorted_list = sorted(my_list)
-        for item in sorted_list:
-            if item in self.stored_dictionary:
-                self.stored_dictionary[item] +=1
+    #5 새롭게 전달받은 문자열이 존재하는지 확인
+    def storeWordlistAsDictionary(self, my_list):
+        my_list.sort()
+        for word in my_list:
+            # 이미 존재하면 누적개수 +=1
+            if word in self.dictionary:
+                self.dictionary[word] +=1
+            # 새로 들어오면 = 1
             else:
-                self.stored_dictionary[item]=1
-        return self.stored_dictionary
-
-    def getWordCount(self,my_string):
-        if my_string in self.stored_dictionary:
-            return (my_string, self.stored_dictionary[my_string])
-        else:
-            return False
-
+                self.dictionary[word] = 1
+        return self.dictionary
+    
+    #6 인자로 준 문자열에 해당하는 key가 dictionary에 존재하면 튜플 형태로 반환
+    def getWordCount(self, my_list):
+        for key, value in self.dictionary.items():
+            if key == my_list:
+                tmp = (key, value)
+                return tmp
+        
+        return False
+            
+    #7 내부 dictionary가 비어있는지 확인 
     def getWordList(self):
-        # if self.stored_dictionary.__len__()!=0:
-        if (len(self.stored_dictionary)!=0):
-            new_list=[]
-
-            # for key in self.stored_dictionary: (key값)
-            for key in (self.stored_dictionary.keys()):
-                new_list.append(key)
-            return sorted(new_list)
-        else:
+        if self.dictionary.__len__()==0:
             return False
-
-
+        # dictionary가 차있다면
+        else:
+            tmp = []
+            # key 값들만 있는 리스트 오름차순 정렬 반환
+            for key,value in self.dictionary.items():
+                tmp.append(key)
+                tmp.sort()
+            return tmp
+    
+#8 class MyClass를 상속받는 새로운 class 선언
 class MyDerivedClass(MyClass):
 
-
-    def __init__(self,id="****"):
+    # 부모 class의 생성자와 동일한 동작, 용도
+    def __init__(self, id="****"):
         super().__init__(id)
-
+    
+    #8번 dictionary이 비어있는지 확인, 차있다면 새로운 형태로 변형해서 key 값들만 반환
     def __str__(self):
-        if(len(self.stored_dictionary)==0):
+        #비어있다면
+        if self.dictionary.__len__()==0:
             return "<>"
         else:
-            new_list = []
-            for key in self.stored_dictionary: #key값
-                new_list.append(key)
-            formatted_list = "<"+",".join(str(key) for key in new_list)+">" 
-            return formatted_list
+            tmp =[]
+            # key 리스트만
+            for key, value in self.dictionary.items():
+                tmp.append(key)
 
-    def __gt__(self, other):
-        if(len(self.stored_dictionary) > len(other.stored_dictionary)):
+            result = "<"+",".join(key for key in tmp)+">"
+            return result
+    
+    #9번 내부 dicitonary 개수 vs 인자 객체의 dictionary 개수 비교
+    def __gt__(self, target):
+        if (self.dictionary.__len__() > target.dictionary.__len__()):
             return True
         else:
             return False
     
-    def __add__(self, other):
-        newDictionary = MyClass("0000")
-        for key in other.stored_dictionary:
-            if key in self.stored_dictionary:
-                newDictionary.stored_dictionary[key] = self.stored_dictionary[key] + other.stored_dictionary[key]
+    #10 내부 저장 dictionary와 target dictionary 통합
+    def __add__(self, target):
+        newdict ={}
+        for key, value in self.dictionary.items():
+            newdict[key]=value
+
+        # target dictionary에서
+        for key,value in target.dictionary.items():
+            
+            # 내부 key 값과 동일한 것이 있으면
+            if key in newdict:
+                newdict[key] += value
+
+            # 처음 들어오는 key
             else:
-                newDictionary.stored_dictionary[key] = other.stored_dictionary[key]
-        return newDictionary
+                newdict[key] = value
 
+        # 새로운 객체에 저장하여 기존 객체들의 정보 유지
+        newObject = MyDerivedClass()
+        newObject.dictionary = newdict
+        return newObject 
 
-# (A) ANSWER END
-############################################################
+# # (A) ANSWER END
+# ############################################################
 
-############################################################
-# (B) STANDARD ANSWER START
+# ############################################################
+# # (B) STANDARD ANSWER START
 
 class StandardMyClass:
 
@@ -129,7 +157,7 @@ class StandardMyClass:
     def getWordList(self):
         if self.wordDictionary.__len__() != 0:
             tmpList = []
-            for item in self.wordDictionary:
+            for item in self.wordDictionary: #key값
                 tmpList.append(item)
             return sorted(tmpList)
         else:

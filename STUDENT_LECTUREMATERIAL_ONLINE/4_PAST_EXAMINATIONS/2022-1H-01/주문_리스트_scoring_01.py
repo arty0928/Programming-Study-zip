@@ -1,110 +1,191 @@
 # ANSWER
 # [START]
+## List 이용한 문제
 
 class Server:
 
     def __init__(self):
-        self.q = []
+        self.orderedList =[] #["주문번호",['잡채','떡볶이']]
 
-    # 1
-    def makeOrder(self, orderNumber, orderList):
-        existAlready = False
-        for order in self.q:
-            if order[0] == orderNumber:
-                existAlready = True
-        if existAlready == True:
-            return -1
-        else:
-            tmp = []
-            tmp.append(orderNumber)
-            tmp.append(orderList)
-            self.q.append(tmp)
-            return tmp
-
-    # 2
-    def getWaitingTime(self, orderNumber, timePerProduct):
-        waitingTime = 0
-        existFlag = False
-        for order in self.q:
-            waitingTime += len(order[1]) * timePerProduct
-            if order[0] == orderNumber:
-                existFlag = True
-                break
-        if existFlag == True:
-            return waitingTime
+    #1 새로운 주문 리스트에 추가
+    def makeOrder(self, orderNum, orderList):
+        for order in self.orderedList:
+            if (orderNum == order[0]):
+                return -1
+        tmp = [orderNum, orderList]
+        self.orderedList.append(tmp)
+        return tmp
+    
+    #2# 리스트에 있는 주문 길이 만큼 소요시간 측정
+    def getWaitingTime(self, orderNum, timePerOrder):
+        isExisted = False
+        totalTime =0 # 소요시간
+        
+        for order in self.orderedList:
+            if orderNum == order[0]:
+                isExisted = True
+                index = self.orderedList.index(order)
+        
+        if(isExisted==True):
+            for order in self.orderedList[:index+1]:
+                totalTime += len(order[1]) * timePerOrder
+            return totalTime            
         else:
             return -1
 
-    # 3
+    #3 list 마지막 인덱스 pop 삭제
     def serveOrder(self):
-        orderNumber = self.q[0][0]
-        orderList = self.q[0][1]
-        del self.q[0]
-        return orderNumber, orderList
-
-    # 4
+        tmp = self.orderedList.pop(0)
+        return (tmp[0],tmp[1])
+    
+    #4 리스트 길이 
     def getOrderNumber(self):
-        return len(self.q)
+        return len(self.orderedList)
+    
+    #5 리스트 찾아서 삭제 후 반환
+    def cancelOrder(self, orderNum):
+        for order in self.orderedList:
+            if orderNum == order[0]:
+                index = self.orderedList.index(order)
+                tmp = self.orderedList.pop(index)
+                return tmp
+        return (-1,-1)
 
-    # 5
-    def cancelOrder(self, orderNumber):
-        orderIndex = -1
-        count = 0
-        for order in self.q:
-            if order[0] == orderNumber:
-                orderIndex = count
-                break
-            count += 1
-        if orderIndex == -1:
-            return -1, -1
-        else:
-            orderNumber = self.q[orderIndex][0]
-            orderList = self.q[orderIndex][1]
-            del self.q[orderIndex]
-            return orderNumber, orderList
+    #6 리스트 중에서 찾아서 리스트 맨 앞으로 옮기기
+    #   주문 번호들만 리스트로 반환
+    def makeOrderVIP(self, orderNum, orderList):
+        for order in self.orderedList:
+            if orderNum == order[0]:
+                return (-1,-1)
 
-    # 6
-    def makeOrderVIP(self, orderNumber, orderList):
-        existAlready = False
-        for order in self.q:
-            if order[0] == orderNumber:
-                existAlready = True
-        if existAlready == True:
-            return -1
-        else:
-            tmp = []
-            tmp.append(orderNumber)
-            tmp.append(orderList)
-            self.q.insert(0, tmp)
+        orderNumList =[]
+        tmp = [orderNum, orderList]
+        self.orderedList.insert(0,tmp)
+        for i in self.orderedList:
+            orderNumList.append(i[0])
+        return orderNumList
 
-            tmp = []
-            for item in self.q:
-                tmp.append(item[0])
-            return tmp
-
-    # 7
-    def giveService(self, orderNumber, serviceProduct):
-        orderIndex = -1
-        count = 0
-        for order in self.q:
-            if order[0] == orderNumber:
-                orderIndex = count
-                break
-            count += 1
-        if orderIndex == -1:
-            return -1, -1
-        else:
-            orderNumber = self.q[orderIndex][0]
-            self.q[orderIndex][1].append(serviceProduct)
-            orderList = self.q[orderIndex][1]
-            return orderNumber, orderList
-
-    # 8
+    
+    #7 리스트에 존재하는 리스트 찾아서 맨 뒤에 추가
+    def giveService(self, orderNum, serviceList):
+        for order in self.orderedList:
+            if orderNum == order[0]:
+                index = self.orderedList.index(order)
+                self.orderedList[index][1].append(serviceList)
+                return (order[0], order[1])
+        return (-1,-1)
+    
+    # 리스트 속 주문 개수
     def getOrderItems(self):
-        count = 0
-        for order in self.q:
-            count += len(order[1])
-        return count
+        tmpOrderNumber = 0 
+        for orders in self.orderedList:
+            tmpOrderNumber += len(orders[1])
+        return tmpOrderNumber
+    
+# class Server:
+
+#     def __init__(self):
+#         self.q = []
+
+#     # 1
+#     def makeOrder(self, orderNumber, orderList):
+#         existAlready = False
+#         for order in self.q:
+#             if order[0] == orderNumber:
+#                 existAlready = True
+#         if existAlready == True:
+#             return -1
+#         else:
+#             tmp = []
+#             tmp.append(orderNumber)
+#             tmp.append(orderList)
+#             self.q.append(tmp)
+#             return tmp
+
+#     # 2
+#     def getWaitingTime(self, orderNumber, timePerProduct):
+#         waitingTime = 0
+#         existFlag = False
+#         for order in self.q:
+#             waitingTime += len(order[1]) * timePerProduct
+#             if order[0] == orderNumber:
+#                 existFlag = True
+#                 break
+#         if existFlag == True:
+#             return waitingTime
+#         else:
+#             return -1
+
+#     # 3
+#     def serveOrder(self):
+#         orderNumber = self.q[0][0]
+#         orderList = self.q[0][1]
+#         del self.q[0]
+#         return orderNumber, orderList
+
+#     # 4
+#     def getOrderNumber(self):
+#         return len(self.q)
+
+#     # 5
+#     def cancelOrder(self, orderNumber):
+#         orderIndex = -1
+#         count = 0
+#         for order in self.q:
+#             if order[0] == orderNumber:
+#                 orderIndex = count
+#                 break
+#             count += 1
+#         if orderIndex == -1:
+#             return -1, -1
+#         else:
+#             orderNumber = self.q[orderIndex][0]
+#             orderList = self.q[orderIndex][1]
+#             del self.q[orderIndex]
+#             return orderNumber, orderList
+
+#     # 6
+#     def makeOrderVIP(self, orderNumber, orderList):
+#         existAlready = False
+#         for order in self.q:
+#             if order[0] == orderNumber:
+#                 existAlready = True
+#         if existAlready == True:
+#             return -1
+#         else:
+#             tmp = []
+#             tmp.append(orderNumber)
+#             tmp.append(orderList)
+#             self.q.insert(0, tmp)
+
+#             tmp = []
+#             for item in self.q:
+#                 tmp.append(item[0])
+#             return tmp
+
+#     # 7
+#     def giveService(self, orderNumber, serviceProduct):
+#         orderIndex = -1
+#         count = 0
+#         for order in self.q:
+#             if order[0] == orderNumber:
+#                 orderIndex = count
+#                 break
+#             count += 1
+#         if orderIndex == -1:
+#             return -1, -1
+#         else:
+#             orderNumber = self.q[orderIndex][0]
+#             self.q[orderIndex][1].append(serviceProduct)
+#             orderList = self.q[orderIndex][1]
+#             return orderNumber, orderList
+
+#     # 8
+#     def getOrderItems(self):
+#         count = 0
+#         for order in self.q:
+#             count += len(order[1])
+#         return count
 
 # [END]
 # ANSWER
