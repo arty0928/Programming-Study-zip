@@ -1,3 +1,5 @@
+# 시간 복잡도 : O(NlogN) ~ O(N의 제곱)
+
 array = [5,7,9,0,3,1,6,2,4,8]
 
 def quick(array,start,end):
