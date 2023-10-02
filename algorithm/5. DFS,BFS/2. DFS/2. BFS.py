@@ -1,6 +1,6 @@
-# 너비 우선 탐색: 시작 노드와 가까운 노드부터 우선 탐색, 소요시간 O(N) dfs보다 빠름
+# 너비 우선 탐색(Breadth first search): 시작 노드와 가까운 노드부터 우선 탐색, 소요시간 O(N) dfs보다 빠름
 # 동작원리 : 큐
-# 구현방법 : 큐 자료구조 이용 (deque)
+# 구현방법 : 큐 자료구조 이용 (deque) -> 선입선출 (먼저 들어온 것 먼저, 가까운 것 먼저)
 
 from collections import deque
 

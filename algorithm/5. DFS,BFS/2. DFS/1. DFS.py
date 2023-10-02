@@ -1,6 +1,8 @@
-# 깊이 우선 탐색: 시작 노드와 연결된 노드를 깊이있게 우선 탐색
+# 깊이 우선 탐색(Depth first search): 시작 노드와 연결된 노드를 깊이있게 우선 탐색
 # 동작 원리: 스택
 # 구현 방법 : 재귀함수
+
+# dfs보다는 bfs가 더빠름
 
 def dfs(graph, v, visited):
     visited[v] = True

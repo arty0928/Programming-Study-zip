@@ -1,3 +1,5 @@
+# 시작 지점부터 가까운 노드 차례대로 그래프의 모든 노드 탐색
+
 from collections import deque
 
 def bfs(x,y):
